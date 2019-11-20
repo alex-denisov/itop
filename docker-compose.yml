@@ -1,0 +1,22 @@
+itop_db:
+    image: mysql:5.7
+    restart: always
+    environment:
+        - MYSQL_DATABASE=itop
+        - MYSQL_USER=itop
+        - MYSQL_PASSWORD=itop
+        - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+        - itop-db:/var/lib/mysql
+
+itop_web:
+    image: americatel/itop
+    restart: always
+    ports:
+        - 9080:80
+    links:
+        - itop_db:db
+    volumes:
+        - itop-extensions:/var/www/html/itop/extensions
+        - itop-conf:/etc/itop
+        - itop-log:/var/log

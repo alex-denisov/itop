@@ -45,9 +45,8 @@ RUN set -x \
  && apt-get update && apt-get install -y ${runtimeDeps} ${buildDeps} --no-install-recommends \
  \
  && pecl install mcrypt-1.0.2 \
- && docker-php-ext-enable mcrypt \
- && docker-php-ext-configure mcrypt \
- && docker-php-ext-install mcrypt \
+ && /usr/local/bin/docker-php-ext-configure mcrypt \
+ && /usr/local/bin/docker-php-ext-install mcrypt \
  \
  && apt-get autoremove -y ${buildDeps} \
  && rm -rf /var/lib/apt/lists/*

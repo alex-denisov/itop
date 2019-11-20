@@ -27,16 +27,16 @@ RUN set -x \
  && rm -rf /var/lib/apt/lists/*
 
 #=== Install intl php dependencies ===
-RUN set -x \
- && runtimeDeps="libicu60" \
- && buildDeps="libicu-dev" \
- && apt-get update && apt-get install -y ${buildDeps} ${runtimeDeps} --no-install-recommends \
- \
- && docker-php-ext-configure intl \
- && docker-php-ext-install intl \
- \
- && apt-get autoremove -y ${buildDeps} \
- && rm -rf /var/lib/apt/lists/*
+#RUN set -x \
+# && runtimeDeps="libicu60" \
+# && buildDeps="libicu-dev" \
+# && apt-get update && apt-get install -y ${buildDeps} ${runtimeDeps} --no-install-recommends \
+# \
+# && docker-php-ext-configure intl \
+# && docker-php-ext-install intl \
+# \
+# && apt-get autoremove -y ${buildDeps} \
+# && rm -rf /var/lib/apt/lists/*
 
 #=== Install mcrypt php dependencies ===
 RUN set -x \

@@ -44,7 +44,7 @@ RUN set -x \
  && buildDeps="libmcrypt-dev" \
  && apt-get update && apt-get install -y ${runtimeDeps} ${buildDeps} --no-install-recommends \
  \
- && docker-php-ext-configure mcrypt
+ && docker-php-ext-configure mcrypt \
  && docker-php-ext-install mcrypt \
  \
  && apt-get autoremove -y ${buildDeps} \

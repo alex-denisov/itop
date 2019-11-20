@@ -1,22 +1,52 @@
-itop_db:
-    image: mysql:5.7
-    restart: always
-    environment:
-        - MYSQL_DATABASE=itop
-        - MYSQL_USER=itop
-        - MYSQL_PASSWORD=itop
-        - MYSQL_RANDOM_ROOT_PASSWORD=yes
-    volumes:
-        - itop-db:/var/lib/mysql
+version: "2.3"
 
-itop_web:
-    image: itop
+# Use this file for an example for production
+
+services:
+  mariadb:
+    image: mariadb:10.4.7
     restart: always
-    ports:
-        - 8000:80
-    links:
-        - itop_db:db
+    stdin_open: true
+    environment:
+      - MYSQL_ROOT_PASSWORD=itop
+      - MYSQL_DATABASE=itop
+      - MYSQL_USER=itop
+      - MYSQL_PASSWORD=itop
     volumes:
-        - itop-extensions:/var/www/html/itop/extensions
-        - itop-conf:/etc/itop
-        - itop-log:/var/log
+      - ./volumes/mariadb:/var/lib/mysql
+  itop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    stdin_open: true
+    environment:
+      - ITOP_DB_HOST=db
+      - ITOP_DB_NAME=itop
+      - ITOP_DB_USER=itop
+      - ITOP_DB_PASS=itop
+      - PHP_TIMEZONE="Europe/Moscow"
+      - PHP_ENABLE_UPLOADS="On"
+      - PHP_MEMORY_LIMIT="256M"
+      - PHP_POST_MAX_SIZE="10M"
+      - PHP_UPLOAD_MAX_FILESIZE="8M"
+      - PHP_MAX_FILE_UPLOADS="20"
+      - PHP_MAX_INPUT_TIME="300"
+      - PHP_LOG_ERRORS="On"
+      - PHP_ERROR_REPORTING="E_ALL" # Production Value: E_ALL & ~E_DEPRECATED & ~E_STRICT
+    links:
+      - mariadb:db
+    ports:
+      - "80:80"
+    volumes:
+      - ./volumes/itop/config:/var/www/html/config
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    stdin_open: true
+    links:
+      - mariadb:db
+    ports:
+      - "8000:80"
+    volumes:
+      - ./volumes/sessions:/sessions

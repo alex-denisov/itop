@@ -13,7 +13,7 @@ itop_web:
     image: itop
     restart: always
     ports:
-        - 80:80
+        - 8000:80
     links:
         - itop_db:db
     volumes:

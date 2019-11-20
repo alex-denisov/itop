@@ -39,11 +39,11 @@ RUN set -x \
 # && rm -rf /var/lib/apt/lists/*
 
 #=== Install mcrypt php dependencies ===
-RUN set -x \
- && runtimeDeps="libmcrypt4" \
- && buildDeps="libmcrypt-dev" \
- && apt-get update && apt-get install -y ${runtimeDeps} ${buildDeps} --no-install-recommends \
- \
+#RUN set -x \
+# && runtimeDeps="libmcrypt4" \
+# && buildDeps="libmcrypt-dev" \
+# && apt-get update && apt-get install -y ${runtimeDeps} ${buildDeps} --no-install-recommends \
+# \
 # && pecl install mcrypt-1.0.2 \
 # && /usr/local/bin/docker-php-ext-configure mcrypt \
 # && /usr/local/bin/docker-php-ext-install mcrypt \

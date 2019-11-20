@@ -10,10 +10,10 @@ itop_db:
         - itop-db:/var/lib/mysql
 
 itop_web:
-    image: americatel/itop
+    image: itop
     restart: always
     ports:
-        - 9080:80
+        - 80:80
     links:
         - itop_db:db
     volumes:

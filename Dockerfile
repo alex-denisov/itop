@@ -44,12 +44,12 @@ RUN set -x \
  && buildDeps="libmcrypt-dev" \
  && apt-get update && apt-get install -y ${runtimeDeps} ${buildDeps} --no-install-recommends \
  \
- && pecl install mcrypt-1.0.2 \
- && /usr/local/bin/docker-php-ext-configure mcrypt \
- && /usr/local/bin/docker-php-ext-install mcrypt \
- \
- && apt-get autoremove -y ${buildDeps} \
- && rm -rf /var/lib/apt/lists/*
+# && pecl install mcrypt-1.0.2 \
+# && /usr/local/bin/docker-php-ext-configure mcrypt \
+# && /usr/local/bin/docker-php-ext-install mcrypt \
+# \
+# && apt-get autoremove -y ${buildDeps} \
+# && rm -rf /var/lib/apt/lists/*
 
 #=== Install zip, soap and opcache php dependencies ===
 RUN set -x \

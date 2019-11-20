@@ -28,7 +28,7 @@ RUN set -x \
 
 #=== Install intl php dependencies ===
 RUN set -x \
- && runtimeDeps="libicu57" \
+ && runtimeDeps="libicu60" \
  && buildDeps="libicu-dev" \
  && apt-get update && apt-get install -y ${buildDeps} ${runtimeDeps} --no-install-recommends \
  \

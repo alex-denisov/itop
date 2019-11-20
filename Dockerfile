@@ -1,7 +1,7 @@
 ##################################
 #=== Single stage with payload ===
 ##################################
-FROM php:7.1-apache
+FROM php:7.3-apache
 
 #=== Install gd php dependencies ===
 RUN set -x \
